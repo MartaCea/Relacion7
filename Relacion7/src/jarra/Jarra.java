@@ -32,10 +32,11 @@ public class Jarra {
 	}
 	
 	public String toString() {
-		return "La jarra tiene " + this.capacidad;
+		return "La jarra tiene " + this.capacidad + " capacidad y " + this.cantidad + " cantidad";
 	}
 	
 	public void llenar() {
+		totalAguaConsumida = capacidad - cantidad + totalAguaConsumida;
 		this.cantidad = capacidad;
 	}
 	
@@ -43,7 +44,16 @@ public class Jarra {
 		this.cantidad = 0;
 	}
 	
-	public void volcar() {
+	public void volcar(Jarra otra) throws JarraException {
+		if(capacidad == 0) {
+			throw new JarraException("La jarra que quiere volcar no tiene nada dentro");
+		}
 		
+		if(cantidad + otra.cantidad > cantidad) {
+			throw new JarraException("No podemos volcar la jarra porque supera la capacidad");
+		}
+		
+		cantidad = cantidad + otra.cantidad;
+		otra.vaciar();
 	}
 }

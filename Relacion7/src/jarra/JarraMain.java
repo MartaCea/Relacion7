@@ -9,17 +9,23 @@ public class JarraMain {
 		Jarra jarraB;
 		int opcion, cap;
 		
-		System.out.println("¿Cual es la capacidad de jarra A?");
-		// cap = capacidad
-		cap = Integer.parseInt(teclado.nextLine());
-		jarraA = new Jarra(cap); 
-		
-		System.out.println("¿Cual es la capacidad de jarra B?");
-		cap = Integer.parseInt(teclado.nextLine());
-		jarraB = new Jarra(cap); 
-		do {
-			opcion = menuJarra();
-		} while (opcion != 6);
+		try {
+			System.out.println("Â¿Cual es la capacidad de jarra A?");
+			// cap = capacidad
+			cap = Integer.parseInt(teclado.nextLine());
+			jarraA = new Jarra(cap); 
+			
+			System.out.println("Â¿Cual es la capacidad de jarra B?");
+			cap = Integer.parseInt(teclado.nextLine());
+			jarraB = new Jarra(cap); 
+			
+			do {
+				opcion = menuJarra();
+				opcionesJarra(opcion, jarraA, jarraB);
+			} while (opcion != 6);
+		} catch(JarraException e) {
+			System.out.println(e.getMessage());
+		}
 		
 	}
 	// METODOS
@@ -38,9 +44,10 @@ public class JarraMain {
 	public static char opcionesJarra(int opcion, Jarra jarraA, Jarra jarraB) {
 		char resp = 0;
 		char salir = 'n';
+		try {
 		switch(opcion) {
 		case 1: {
-			System.out.println("¿Que jarra desea llenar (A/B)?");
+			System.out.println("ï¿½Que jarra desea llenar (A/B)?");
 			resp = teclado.nextLine().charAt(0);
 			resp = Character.toUpperCase(resp);
 			if(resp == 'A') {
@@ -54,7 +61,7 @@ public class JarraMain {
 		}
 			
 		case 2: {
-			System.out.println("¿Qué jarra desea vaciar (A/B)?");
+			System.out.println("Â¿QuÃ© jarra desea vaciar (A/B)?");
 			resp = Character.toUpperCase(resp);
 			if(resp == 'A') {
 				jarraA.vaciar();
@@ -67,26 +74,34 @@ public class JarraMain {
 		}
 			
 		case 3: {
+			jarraA.volcar(jarraB);
+			System.out.println("La cantidad de jarra A es");
+			
 			break;
 		}
 			
 		case 4:{
+			jarraB.volcar(jarraA);
 			break;
 		}
 			
 		case 5:{
 			System.out.println(jarraA);
 			System.out.println(jarraB);
+			System.out.println("Se han consumido " + Jarra.getTotalAguaConsumida() + " litros");
 			break;
 		}
 			
 		case 6: {
-			System.out.println("¿Desea salir?");
+			System.out.println("Â¿Desea salir?");
 			if (salir == 's') {
-				System.out.println("Gracias, hasta la proxima!!");
+				System.out.println("El total de agua para la jarra A " + jarraA.getTotalAguaConsumida() + " y jarra B " + jarraB.getTotalAguaConsumida());
 			}
 			break;
 		}
+		}
+		}catch (JarraException e) {
+			System.out.println(e.getMessage());
 		}
 		return salir;
 		
