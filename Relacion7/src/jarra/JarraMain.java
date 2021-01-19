@@ -10,12 +10,12 @@ public class JarraMain {
 		int opcion, cap;
 		
 		try {
-			System.out.println("Â¿Cual es la capacidad de jarra A?");
+			System.out.println("¿Cual es la capacidad de jarra A?");
 			// cap = capacidad
 			cap = Integer.parseInt(teclado.nextLine());
 			jarraA = new Jarra(cap); 
 			
-			System.out.println("Â¿Cual es la capacidad de jarra B?");
+			System.out.println("¿Cual es la capacidad de jarra B?");
 			cap = Integer.parseInt(teclado.nextLine());
 			jarraB = new Jarra(cap); 
 			
@@ -47,28 +47,24 @@ public class JarraMain {
 		try {
 		switch(opcion) {
 		case 1: {
-			System.out.println("ï¿½Que jarra desea llenar (A/B)?");
+			System.out.println("¿Qué jarra desea llenar (A/B)?");
 			resp = teclado.nextLine().charAt(0);
 			resp = Character.toUpperCase(resp);
 			if(resp == 'A') {
 				jarraA.llenar();
 			}else {
-				if(resp == 'B') {
-					jarraB.llenar();
-				}
+				jarraB.llenar();
 			}
 			break;
 		}
 			
 		case 2: {
-			System.out.println("Â¿QuÃ© jarra desea vaciar (A/B)?");
+			System.out.println("¿Qué jarra desea vaciar (A/B)?");
 			resp = Character.toUpperCase(resp);
 			if(resp == 'A') {
 				jarraA.vaciar();
 			}else {
-				if(resp == 'B') {
-					jarraB.vaciar();
-				}
+				jarraB.vaciar();
 			}
 			break;
 		}
