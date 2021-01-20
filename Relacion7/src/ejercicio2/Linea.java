@@ -35,6 +35,7 @@ public class Linea {
 		punto = punto + moverDer;
 		
 		return punto;
+		
 	}
 	
 	public double moverIzquierda(double moverIzq) {
