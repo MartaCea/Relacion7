@@ -29,37 +29,57 @@ public class Linea {
 		return "Linea de " + puntoA + " a " + puntoB;
 	}
 	
-	public double moverDerecha(double moverDer) {
-		double punto = 0;
-
-		punto = punto + moverDer;
-		
-		return punto;
+	public void moverDerecha(double moverDer) throws LineaException {
+		// excepciones
+		if(moverDer < 0) {
+			throw new LineaException("Los movimientos no pueden ser negativos");
+		}
+		if(moverDer == 0) {
+			throw new LineaException("El movimiento no puede ser 0 porque sino no se mueve la linea");
+		}
+		// mover la x de los putnos a y b a la derecha
+		this.puntoA.setX(this.puntoA.getX() + moverDer);
+		this.puntoB.setX(this.puntoB.getX() + moverDer);
 		
 	}
 	
-	public double moverIzquierda(double moverIzq) {
-		double punto = 0;
-		
-		punto = punto - moverIzq;
-		
-		return punto;
+	public void moverIzquierda(double moverIzq) throws LineaException {
+		// excepciones
+		if(moverIzq < 0) {
+			throw new LineaException("Los movimientos no pueden ser negativos");
+		}
+		if(moverIzq == 0) {
+			throw new LineaException("El movimiento no puede ser 0 porque sino no se mueve la linea");
+		}
+		// mover la x de los puntos a y b a la izquierda
+		this.puntoA.setX(this.puntoA.getX() - moverIzq);
+		this.puntoB.setX(this.puntoB.getX() - moverIzq);
 	}
 	
-	public double moverArriba(double moverArriba) {
-		double punto = 0;
-
-		punto = punto + moverArriba;
-		
-		return punto;
+	public void moverArriba(double moverArriba) throws LineaException {
+		// excepciones
+		if(moverArriba < 0) {
+			throw new LineaException("Los movimientos no pueden ser negativos");
+		}
+		if(moverArriba == 0) {
+			throw new LineaException("El movimiento no puede ser 0 porque sino no se mueve la linea");
+		}
+		// mover la x de los puntos a y b a la izquierda
+		this.puntoA.setY(this.puntoA.getY() + moverArriba);
+		this.puntoB.setY(this.puntoB.getY() + moverArriba);
 	}
 	
-	public double moverAbajo(double moverAbajo) {
-		double punto = 0;
-	
-		punto = punto - moverAbajo;
-		
-		return punto;
+	public void moverAbajo(double moverAbajo) throws LineaException {
+		// excepciones
+		if(moverAbajo < 0) {
+			throw new LineaException("Los movimientos no pueden ser negativos");
+		}
+		if(moverAbajo == 0) {
+			throw new LineaException("El movimiento no puede ser 0 porque sino no se mueve la linea");
+		}
+		// mover la x de los puntos a y b a la izquierda
+		this.puntoA.setY(this.puntoA.getY() - moverAbajo);
+		this.puntoB.setY(this.puntoB.getY() - moverAbajo);
 	}
 	
 }

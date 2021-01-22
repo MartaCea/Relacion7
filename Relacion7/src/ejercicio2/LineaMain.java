@@ -5,80 +5,72 @@ import java.util.Scanner;
 public class LineaMain {
 	private static Scanner teclado = new Scanner(System.in);
 	public static void main(String[] args) {
-		double x, y;
+		boolean terminar = false;
 		char answ = 0;
-		Punto puntoA, puntoB;
-		Linea lin;
+		Linea linea;
 		
-		// PUNTO A
-		System.out.println("Introduzca la X del punto A: ");
-		x = Double.parseDouble(teclado.nextLine());
-		System.out.println("Introduzca la Y del punto A: ");
-		y = Double.parseDouble(teclado.nextLine());
-		puntoA = new Punto(x, y);
-		// PUNTO B
-		System.out.println("Introduzca la X del punto B: ");
-		x = Double.parseDouble(teclado.nextLine());
-		System.out.println("Introduzca la Y del punto B: ");
-		y = Double.parseDouble(teclado.nextLine());
-		puntoB = new Punto(x, y);
-		
-		// HACER LA LINEA
-		lin = new Linea(puntoA,puntoB);
-		
-		answ = menuLinea();
-		answ = Character.toUpperCase(answ);
-		opcionesMenuLinea(answ, lin);
+		try {
+			linea = crearLinea();
+			do {
+				answ = menuLinea();
+				answ = Character.toUpperCase(answ);
+				terminar = opcionesMenuLinea(answ, linea);
+			}while(terminar);
+		}catch (LineaException e) {
+			System.out.println(e.getMessage());
+		}
 		
 	}
 	
+	public static Linea crearLinea() {
+		Punto puntoA, puntoB;
+		Linea linea;
+		
+		puntoA = crearPunto();
+		puntoB = crearPunto();
+		
+		linea = new Linea(puntoA, puntoB);
+		
+		return linea;
+	}
+	
+	public static Punto crearPunto() {
+		Punto punto;
+		double x, y;
+		
+		System.out.println("Introduzca la X del punto: ");
+		x = Double.parseDouble(teclado.nextLine());
+		System.out.println("Introduzca la Y del punto: ");
+		y = Double.parseDouble(teclado.nextLine());
+		punto = new Punto(x, y);
+		
+		return punto;
+	}
+	
 	public static char menuLinea() {
-		char opcion = 0;
+		char opcion;
 		
 		System.out.println("1. Mover linea");
+		// toString para mostrar linea
+		System.out.println("2. Mostrar lï¿½nea");
+		System.out.println("3. Salir");
+		opcion = teclado.nextLine().charAt(0);
 		if(opcion == 1) {
 			System.out.println("A(arriba), B(abajo), I(izquierda), D(derecha)");
 			opcion = teclado.nextLine().charAt(0);
 		}
-		// toString para mostrar linea
-		System.out.println("2. Mostrar línea");
-		System.out.println("3. Salir");
-		opcion = teclado.nextLine().charAt(0);
 		
 		return opcion;
 	}
 	
-	public static boolean opcionesMenuLinea(char answ, Linea lin) {
-		double mover;
+	public static boolean opcionesMenuLinea(char answ, Linea lin) throws LineaException {
 		char resp;
 		boolean terminar = false;
 		
 		do {
 			switch(answ) {
 			case 1: {
-				if(answ == 'A') {
-					System.out.println("Cuanto la quieres mover?");
-					mover = Double.parseDouble(teclado.nextLine());
-					lin.moverArriba(mover);
-				}else {
-					if(answ == 'B') {
-						System.out.println("Cuanto la quieres mover?");
-						mover = Double.parseDouble(teclado.nextLine());
-						lin.moverAbajo(mover);
-					}else {
-						if(answ == 'I') {
-							System.out.println("Cuanto la quieres mover?");
-							mover = Double.parseDouble(teclado.nextLine());
-							lin.moverIzquierda(mover);
-						}else {
-							if(answ == 'D') {
-								System.out.println("Cuanto la quieres mover?");
-								mover = Double.parseDouble(teclado.nextLine());
-								lin.moverDerecha(mover);
-							}
-						}
-					}
-				}
+				moverLinea(answ, lin);
 				break;
 			}
 			case 2:{
@@ -97,5 +89,39 @@ public class LineaMain {
 		}while(terminar == false);
 		
 		return terminar;
+	}
+	
+	public static void moverLinea(char opcion, Linea lin) throws LineaException {
+		double mover;
+		
+		
+			switch(opcion) {
+			case 'A': {
+				System.out.println("Cuanto la quieres mover?");
+				mover = Double.parseDouble(teclado.nextLine());
+				lin.moverArriba(mover);
+				break;
+			}
+			case 'B': {
+				System.out.println("Cuanto la quieres mover?");
+				mover = Double.parseDouble(teclado.nextLine());
+				lin.moverAbajo(mover);
+				break;
+			}
+			case 'I': {
+				System.out.println("Cuanto la quieres mover?");
+				mover = Double.parseDouble(teclado.nextLine());
+				lin.moverIzquierda(mover);
+				break;
+			}
+			case 'D': {
+				System.out.println("Cuanto la quieres mover?");
+				mover = Double.parseDouble(teclado.nextLine());
+				lin.moverDerecha(mover);
+				break;
+			}
+			}
+		
+		
 	}
 }
